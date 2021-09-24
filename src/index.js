@@ -1,17 +1,57 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDom from "react-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  NavLink,
+  Switch,
+} from "react-router-dom";
+import AnotherHeading from "./anotherComp";
+import OneMoreHeading from "./oneMoreComp";
+import Newheading from "./newcomp";
+import NotFound from "./NotFoundComp";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+const MainFun = (
+  <Router>
+    <div
+      style={{
+        border: "2px solid black",
+        width: "500px",
+        height: "auto",
+        margin: "auto",
+        textAlign: "center",
+        padding: "8px 20px",
+        position: "absolute",
+        top: "30%",
+        left: "30%",
+      }}
+    >
+      <h1>React Router Example</h1>
+      <ul style={{ textDecoration: "none", listStyle: "none" }}>
+        <li>
+          <NavLink to="/" exact activeStyle={{ color: "red" }}>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/one" exact activeStyle={{ color: "red" }}>
+            OneMoreComponent
+          </NavLink>
+          <li>
+            <NavLink to="/new" exact activeStyle={{ color: "red" }}>
+              NewComponent
+            </NavLink>
+          </li>
+        </li>
+      </ul>
+      <Switch>
+        <Route exact path="/" component={AnotherHeading} />
+        <Route path="/one" component={OneMoreHeading} />
+        <Route path="/new" component={Newheading} />
+        <Route component={NotFound} />
+      </Switch>
+    </div>
+  </Router>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+ReactDom.render(MainFun, document.getElementById("root"));
